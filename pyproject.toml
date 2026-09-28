@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "toolrecap_v5"
+dynamic = ["version"]
+description = "ToolRecap V5 simplified Gateway-to-render desktop application"
+requires-python = ">=3.12"
+dependencies = [
+    "jsonschema>=4.20.0",
+    "httpx>=0.27.0",
+    "windows-toasts>=1.3.0",
+    "Pillow>=10.0.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=8.0.0",
+]
+source-prep = [
+    "faster-whisper>=1.0.0",
+    "huggingface-hub>=0.20.0",
+    "rapidocr-onnxruntime>=1.3.0",
+    "onnxruntime>=1.16.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.setuptools.dynamic]
+version = {attr = "toolrecap_v4.__version__.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["toolrecap_v4*"]
+
+[tool.setuptools.package-data]
+toolrecap_v4 = ["schemas/*.json"]

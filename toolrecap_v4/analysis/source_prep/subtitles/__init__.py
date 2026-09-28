@@ -1,0 +1,106 @@
+"""Unified subtitle discovery, direct parsing, PGS/VobSub decoding, and caching for ToolRecap V4."""
+from __future__ import annotations
+
+from .cache import SubtitleCacheManager, compute_subtitle_cache_key
+from .discovery import (
+    build_embedded_tracks,
+    discover_sidecars,
+    extract_episode_identifiers,
+    extract_show_prefix,
+    match_episode,
+    select_best_english_subtitles,
+)
+from .models import (
+    PgsSubtitleEvent,
+    SubtitleCue,
+    SubtitleDiscoveryResult,
+    SubtitleStreamInfo,
+    SubtitleTrack,
+    VobSubEvent,
+    normalize_language_code,
+)
+from .ocr import (
+    DEFAULT_OCR_MANIFEST,
+    DEFAULT_OCR_MODELS,
+    OcrAdapter,
+    OcrModelInfo,
+    OcrModelManifest,
+    OcrModelManager,
+    OcrResult,
+    VisionOcrAdapter,
+    compute_ocr_dependency_signature,
+    quality_gate,
+    validate_cropped_image,
+)
+from .parsers import (
+    MAX_ROUNDING_JITTER_MS,
+    normalize_subtitle_text,
+    parse_ass,
+    parse_srt,
+    parse_timestamp_ass,
+    parse_timestamp_srt,
+    parse_timestamp_vtt,
+    parse_vtt,
+    strip_formatting_tags,
+)
+from .pgs import create_minimal_pgs_sup, parse_pgs_sup
+from .pipeline import (
+    SubtitlePipeline,
+    SubtitlePipelineResult,
+    extract_embedded_subtitle_stream,
+)
+from .vobsub import (
+    create_synthetic_vobsub,
+    extract_vobsub_events,
+    parse_spu_packet,
+    parse_vobsub_idx,
+    parse_vobsub_timestamp,
+)
+
+__all__ = [
+    "DEFAULT_OCR_MANIFEST",
+    "DEFAULT_OCR_MODELS",
+    "MAX_ROUNDING_JITTER_MS",
+    "OcrAdapter",
+    "OcrModelInfo",
+    "OcrModelManifest",
+    "OcrModelManager",
+    "OcrResult",
+    "PgsSubtitleEvent",
+    "SubtitleCacheManager",
+    "SubtitleCue",
+    "SubtitleDiscoveryResult",
+    "SubtitlePipeline",
+    "SubtitlePipelineResult",
+    "SubtitleStreamInfo",
+    "SubtitleTrack",
+    "VisionOcrAdapter",
+    "VobSubEvent",
+    "build_embedded_tracks",
+    "compute_ocr_dependency_signature",
+    "compute_subtitle_cache_key",
+    "create_minimal_pgs_sup",
+    "create_synthetic_vobsub",
+    "discover_sidecars",
+    "extract_embedded_subtitle_stream",
+    "extract_episode_identifiers",
+    "extract_show_prefix",
+    "extract_vobsub_events",
+    "match_episode",
+    "normalize_language_code",
+    "normalize_subtitle_text",
+    "parse_ass",
+    "parse_pgs_sup",
+    "parse_spu_packet",
+    "parse_srt",
+    "parse_timestamp_ass",
+    "parse_timestamp_srt",
+    "parse_timestamp_vtt",
+    "parse_vobsub_idx",
+    "parse_vobsub_timestamp",
+    "parse_vtt",
+    "quality_gate",
+    "select_best_english_subtitles",
+    "strip_formatting_tags",
+    "validate_cropped_image",
+]
